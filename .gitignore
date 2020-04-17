@@ -1,4 +1,4 @@
-Library/
-ProjectSettings/
-Packages/
-Temp/
+*Library/
+*ProjectSettings/
+*Packages/
+*Temp/
