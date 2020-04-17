@@ -1,4 +1,4 @@
-/LD46/Library/*
-/LD46/ProjectSettings/*
-/LD46/Packages/*
-/LD46/Temp/*
+/LD46/Library/**
+/LD46/ProjectSettings/**
+/LD46/Packages/**
+/LD46/Temp/**
