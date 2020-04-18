@@ -7,11 +7,24 @@ public class PlayerMovement : MonoBehaviour
     private float rotationX;
 
     public float movementSpeed = 2f;
+    public float crouchingSpeed = 1f;
     public float lookSpeed = 2f;
     public float lookXLimit = 45f;
 
     public float slopeForceRayLength;
-    public float slopeForce; 
+    public float slopeForce;
+    public float checkingDistance = 5f;
+
+    public float transitSpeed = 5f;
+
+    public Transform walkingCameraPos;
+    public Transform crouchingCameraPos;
+    public Vector3 currentCameraPos;
+    
+    public GameObject walkingCollider;
+    public GameObject crouchingCollider;
+    
+    public PlayerState currentState = PlayerState.Walking;
     
     Vector3 moveDirection = Vector3.zero;
 
@@ -25,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
 
         charController = GetComponent<CharacterController>();
         cam = GetComponentInChildren<Camera>();
+
+        currentCameraPos = cam.transform.position;
     }
 
     private bool OnSlope()
@@ -40,14 +55,31 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
     
-    // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            currentState = PlayerState.Crouching;
+            currentCameraPos = crouchingCameraPos.position;
+            walkingCollider.SetActive(false);
+            crouchingCollider.SetActive(true);
+        }
+        else
+        {
+            currentState = PlayerState.Walking;
+            currentCameraPos = walkingCameraPos.position;
+            walkingCollider.SetActive(true);
+            crouchingCollider.SetActive(false);
+        }
+        
+        cam.transform.position =
+            Vector3.Lerp(cam.transform.position, currentCameraPos, transitSpeed * Time.deltaTime);
+
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         
-        float curSpeedX = movementSpeed * Input.GetAxis("Vertical");
-        float curSpeedY = movementSpeed * Input.GetAxis("Horizontal");
+        float curSpeedX = (currentState == PlayerState.Walking ? movementSpeed : crouchingSpeed) * Input.GetAxis("Vertical");
+        float curSpeedY = (currentState == PlayerState.Walking ? movementSpeed : crouchingSpeed) * Input.GetAxis("Horizontal");
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
         if (moveDirection != Vector3.zero && OnSlope())
@@ -61,5 +93,19 @@ public class PlayerMovement : MonoBehaviour
         rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
         cam.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+
+        RaycastHit hit;
+        
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, checkingDistance))
+            Debug.Log(hit.collider.name);
+        
+        Debug.DrawRay(cam.transform.position, cam.transform.forward * checkingDistance, Color.red);
+            
     }
+}
+
+public enum PlayerState
+{
+    Walking    = 0,
+    Crouching  = 1
 }
