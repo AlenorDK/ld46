@@ -30,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController charController;
     private Camera cam;
+
+    public LayerMask maskWithoutPlayer;
     
     void Start()
     {
@@ -96,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
         RaycastHit hit;
         
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, checkingDistance))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, checkingDistance, maskWithoutPlayer))
             Debug.Log(hit.collider.name);
         
         Debug.DrawRay(cam.transform.position, cam.transform.forward * checkingDistance, Color.red);
