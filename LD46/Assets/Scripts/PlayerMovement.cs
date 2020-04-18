@@ -102,9 +102,7 @@ public class PlayerMovement : MonoBehaviour
         {
             charController.Move((Vector3.down) * slopeForce * Time.deltaTime);
         }
-        
-        Debug.Log(boxPlacement.transform.position + " " + boxPlacement.transform.localPosition);
-        
+
         charController.SimpleMove(moveDirection);
         
         rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
@@ -119,11 +117,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Collider[] hitColliders = Physics.OverlapBox(boxPlacement.transform.position,
             boxPlacement.transform.localScale / 2, Quaternion.identity, maskWithoutBox);
-
-        foreach (Collider col in hitColliders)
-        {
-            Debug.Log(col.name);
-        }
         
         if (hitColliders.Length == 0)
         {
@@ -150,14 +143,17 @@ public class PlayerMovement : MonoBehaviour
             maskWithoutPlayer))
         {
             
-            if (hit.collider.GetComponent<ContainerController>() != null)
+            if (hit.collider.GetComponentInParent<ContainerController>())
             {
-                hit.collider.GetComponent<ContainerController>().PickUp();
-                hit.collider.transform.parent = handheldObjectTransform;
-                hit.collider.transform.localPosition = Vector3.zero;
-                hit.collider.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                heldObject = hit.collider.gameObject;
+                ContainerController controller = hit.collider.GetComponentInParent<ContainerController>();
+                controller.PickUp();
+                controller.transform.parent = handheldObjectTransform;
+                controller.transform.localPosition = Vector3.zero;
+                controller.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                heldObject = controller.gameObject;
             }
+            else 
+                Debug.Log(hit.collider.name);
         }
     }
 }

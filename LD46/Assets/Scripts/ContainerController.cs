@@ -11,12 +11,40 @@ public class ContainerController : InteractableObject
 
     public Vector3 pickedUpScale;
     public Quaternion origRotation;
+
+    public float Energy = 100f;
+    public float Frost = 100f;
+    public float Heat = 100f;
+
+    public GameObject EnergyBar;
+    public GameObject FrostBar;
+    public GameObject HeatBar;
+
+    public float lerpSpeed = 2f;
     
     void Start()
     {
-        rg = GetComponent<Rigidbody>();
-        col = GetComponent<Collider>();
+        rg = GetComponentInChildren<Rigidbody>();
+        col = GetComponentInChildren<Collider>();
         origRotation = transform.rotation;
+    }
+
+    void Update()
+    {
+        EnergyBar.transform.localScale = new Vector3(
+            EnergyBar.transform.localScale.x,
+            Mathf.Lerp(EnergyBar.transform.localScale.y, Energy / 100f, lerpSpeed * Time.deltaTime),
+            EnergyBar.transform.localScale.z);
+        
+        FrostBar.transform.localScale = new Vector3(
+            FrostBar.transform.localScale.x, 
+            Mathf.Lerp(FrostBar.transform.localScale.y, Frost / 100f, lerpSpeed * Time.deltaTime),
+            FrostBar.transform.localScale.z);
+        
+        HeatBar.transform.localScale = new Vector3(
+            HeatBar.transform.localScale.x, 
+            Mathf.Lerp(HeatBar.transform.localScale.y, Heat / 100f, lerpSpeed * Time.deltaTime),
+            HeatBar.transform.localScale.z);
     }
     
     public void PickUp()
