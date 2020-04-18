@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -39,6 +41,14 @@ public class PlayerMovement : MonoBehaviour
     public GameObject boxPlacement;
     public Transform handheldObjectTransform;
 
+    private bool needsToInteract = false;
+    private bool needsToPlace = false;
+
+    private bool isJumping;
+
+    public AnimationCurve jumpFallOff;
+    public float jumpMultiplier;
+    
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -68,9 +78,15 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (heldObject != null)
-                TryPlace();
+                needsToPlace = true;
             else
-                Interact();
+                needsToInteract = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+        {
+            isJumping = true;
+            StartCoroutine(JumpEvent());
         }
         
         if (Input.GetKey(KeyCode.LeftControl))
@@ -113,6 +129,24 @@ public class PlayerMovement : MonoBehaviour
         Debug.DrawRay(cam.transform.position, cam.transform.forward * checkingDistance, Color.red);
     }
 
+    private IEnumerator JumpEvent()
+    {
+        charController.slopeLimit = 90f;
+        float timeInAir = 0.0f;
+
+        do
+        {
+            float jumpForce = jumpFallOff.Evaluate(timeInAir);
+            charController.Move(Vector3.up * jumpForce * jumpMultiplier * Time.deltaTime);
+            timeInAir += Time.deltaTime;
+            yield return null;
+        } while (!charController.isGrounded && charController.collisionFlags != CollisionFlags.Above);
+
+        isJumping = false;
+        charController.slopeLimit = 60f;
+    }
+    
+    
     void TryPlace()
     {
         Collider[] hitColliders = Physics.OverlapBox(boxPlacement.transform.position,
@@ -136,6 +170,21 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (needsToInteract)
+        {
+            Interact();
+            needsToInteract = false;
+        }
+
+        if (needsToPlace)
+        {
+            TryPlace();
+            needsToPlace = false;
+        }
+    }
+
     void Interact()
     {
         RaycastHit hit;
@@ -152,8 +201,10 @@ public class PlayerMovement : MonoBehaviour
                 controller.transform.localRotation = Quaternion.Euler(0, 0, 0);
                 heldObject = controller.gameObject;
             }
-            else 
-                Debug.Log(hit.collider.name);
+            else if (hit.collider.GetComponentInParent<InteractableObject>())
+            {
+                hit.collider.GetComponentInParent<InteractableObject>().Activate(false);
+            }
         }
     }
 }
