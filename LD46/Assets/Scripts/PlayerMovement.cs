@@ -58,6 +58,12 @@ public class PlayerMovement : MonoBehaviour
     public GameObject hands;
 
     public int bulletDamage = 1;
+
+    public int health = 3;
+
+    public bool isAlive = true;
+
+    public Animator anim;
     
     void Start()
     {
@@ -263,6 +269,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Shoot()
     {
+        anim.SetTrigger("Shoot");
         canShoot = false;
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, shotDistance,
@@ -274,6 +281,17 @@ public class PlayerMovement : MonoBehaviour
         }
         yield return new WaitForSeconds(shotDelay);
         canShoot = true;
+    }
+
+    public void Damage(int incomingDamage)
+    {
+        health -= incomingDamage;
+
+        if (health <= 0)
+        {
+            isAlive = false;
+            Debug.Log("You died");
+        }
     }
     
     private void OnTriggerEnter(Collider other)
