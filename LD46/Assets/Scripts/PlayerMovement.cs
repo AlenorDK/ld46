@@ -48,6 +48,9 @@ public class PlayerMovement : MonoBehaviour
 
     public AnimationCurve jumpFallOff;
     public float jumpMultiplier;
+
+    public bool canShoot = true;
+    public float shotDelay = 0.5f;
     
     void Start()
     {
@@ -75,6 +78,9 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
+        if (Input.GetMouseButtonDown(0) && canShoot)
+            StartCoroutine(Shoot());
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (heldObject != null)
@@ -149,25 +155,38 @@ public class PlayerMovement : MonoBehaviour
     
     void TryPlace()
     {
-        Collider[] hitColliders = Physics.OverlapBox(boxPlacement.transform.position,
-            boxPlacement.transform.localScale / 2, Quaternion.identity, maskWithoutBox);
-        
-        if (hitColliders.Length == 0)
+        RaycastHit hit0;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit0, checkingDistance,
+            maskWithoutPlayer))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(boxPlacement.transform.position, Vector3.down, out hit, checkingDistance))
+            if (hit0.collider.GetComponentInParent<ContainerLoaderController>())
             {
-                var distanceToGround = hit.distance;
-                heldObject.transform.position = new Vector3(boxPlacement.transform.position.x, 
-                    boxPlacement.transform.position.y - hit.distance + 0.5f, 
-                    boxPlacement.transform.position.z);
-                heldObject.transform.parent = null;
-                heldObject.transform.rotation =
-                    transform.rotation * heldObject.GetComponent<ContainerController>().origRotation;
-                heldObject.GetComponent<ContainerController>().Place();
+                hit0.collider.GetComponentInParent<ContainerLoaderController>().Place(heldObject);
+                heldObject.GetComponent<ContainerController>().PlaceInCharger();
                 heldObject = null;
+                return;
             }
         }
+
+        Collider[] hitColliders = Physics.OverlapBox(boxPlacement.transform.position,
+                boxPlacement.transform.localScale / 2, Quaternion.identity, maskWithoutBox);
+
+            if (hitColliders.Length == 0)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(boxPlacement.transform.position, Vector3.down, out hit, checkingDistance))
+                {
+                    var distanceToGround = hit.distance;
+                    heldObject.transform.position = new Vector3(boxPlacement.transform.position.x,
+                        boxPlacement.transform.position.y - hit.distance + 0.5f,
+                        boxPlacement.transform.position.z);
+                    heldObject.transform.parent = null;
+                    heldObject.transform.rotation =
+                        transform.rotation * heldObject.GetComponent<ContainerController>().origRotation;
+                    heldObject.GetComponent<ContainerController>().Place();
+                    heldObject = null;
+                }
+            }
     }
 
     private void FixedUpdate()
@@ -206,6 +225,14 @@ public class PlayerMovement : MonoBehaviour
                 hit.collider.GetComponentInParent<InteractableObject>().Activate(false);
             }
         }
+    }
+
+    IEnumerator Shoot()
+    {
+        canShoot = false;
+        Debug.Log("Shoot");
+        yield return new WaitForSeconds(shotDelay);
+        canShoot = true;
     }
 }
 
