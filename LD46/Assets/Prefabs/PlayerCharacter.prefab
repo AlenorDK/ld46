@@ -514,7 +514,8 @@ MonoBehaviour:
   lookXLimit: 70
   slopeForceRayLength: 1.5
   slopeForce: 30
-  checkingDistance: 5
+  checkingDistance: 2
+  shotDistance: 25
   transitSpeed: 5
   walkingCameraPos: {fileID: 1410566189}
   crouchingCameraPos: {fileID: 1535540072}
@@ -535,27 +536,40 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1.0023499
+      time: 0.0000009536743
+      value: 0.9958503
+      inSlope: -0.015260356
+      outSlope: -0.015260356
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.13574578
+    - serializedVersion: 3
+      time: 0.25238612
+      value: 0.53277063
+      inSlope: -8.083278
+      outSlope: -8.083278
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.047557477
+    - serializedVersion: 3
+      time: 0.4988718
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.7041626
-      value: 0.0000076293945
-      inSlope: -0.044348475
-      outSlope: -0.044348475
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.4377877
+      inWeight: 0.11538474
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   jumpMultiplier: 5
+  canShoot: 1
+  shotDelay: 0.5
+  hands: {fileID: 0}
+  bulletDamage: 1
 --- !u!54 &6275162205150788657
 Rigidbody:
   m_ObjectHideFlags: 0
