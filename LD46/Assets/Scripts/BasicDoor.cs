@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class BasicDoor : InteractableObject
     public Transform openedPosition;
     public Transform closedPosition;
     public Vector3 targetPosition;
+    public Quaternion targetRotation;
 
     public GameObject door;
 
@@ -18,11 +20,18 @@ public class BasicDoor : InteractableObject
     void Start()
     {
         if (isOpened)
+        {
             door.transform.position = openedPosition.position;
+            door.transform.rotation = openedPosition.rotation;
+        }
         else
+        {
             door.transform.position = closedPosition.position;
-        
+            door.transform.rotation = closedPosition.rotation;
+        }
+
         targetPosition = isOpened ? openedPosition.position : closedPosition.position;
+        targetRotation = isOpened ? openedPosition.rotation : closedPosition.rotation;
     }
 
     public override void Activate(bool forced)
@@ -31,11 +40,20 @@ public class BasicDoor : InteractableObject
             isOpened = !isOpened;
 
         targetPosition = isOpened ? openedPosition.position : closedPosition.position;
+        targetRotation = isOpened ? openedPosition.rotation : closedPosition.rotation;
     }
 
     void Update()
     {
         targetPosition = isOpened ? openedPosition.position : closedPosition.position;
+        targetRotation = isOpened ? openedPosition.rotation : closedPosition.rotation;
         door.transform.position = Vector3.Lerp(door.transform.position, targetPosition, lerpingSpeed * Time.deltaTime);
+        door.transform.rotation = Quaternion.Lerp(door.transform.rotation, targetRotation, lerpingSpeed * Time.deltaTime);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(openedPosition.position, closedPosition.position);
     }
 }
