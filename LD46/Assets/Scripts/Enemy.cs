@@ -38,8 +38,8 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward);
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
-        NavMeshPath path = new NavMeshPath();
-        agent.CalculatePath(transform.position, playerObj.transform.position, NavMesh.AllAreas, path);
+        //NavMeshPath path = new NavMeshPath();
+        //agent.CalculatePath(transform.position, playerObj.transform.position, NavMesh.AllAreas, path);
         
         if (state == EnemyState.MovingToPlayer)
         {
