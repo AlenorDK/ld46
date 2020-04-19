@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public float slopeForceRayLength;
     public float slopeForce;
     public float checkingDistance = 5f;
+    public float shotDistance = 25f;
 
     public float transitSpeed = 5f;
 
@@ -43,11 +44,19 @@ public class PlayerMovement : MonoBehaviour
 
     private bool needsToInteract = false;
     private bool needsToPlace = false;
+    private bool needsToShoot = false;
 
     private bool isJumping;
 
     public AnimationCurve jumpFallOff;
     public float jumpMultiplier;
+
+    public bool canShoot = true;
+    public float shotDelay = 0.5f;
+
+    public GameObject hands;
+
+    public int bulletDamage = 1;
     
     void Start()
     {
@@ -75,6 +84,11 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
+        hands.SetActive(heldObject == null);
+
+        if (Input.GetMouseButtonDown(0) && canShoot && heldObject == null)
+            needsToShoot = true;
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (heldObject != null)
@@ -149,25 +163,46 @@ public class PlayerMovement : MonoBehaviour
     
     void TryPlace()
     {
-        Collider[] hitColliders = Physics.OverlapBox(boxPlacement.transform.position,
-            boxPlacement.transform.localScale / 2, Quaternion.identity, maskWithoutBox);
-        
-        if (hitColliders.Length == 0)
+        RaycastHit hit0;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit0, checkingDistance,
+            maskWithoutPlayer))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(boxPlacement.transform.position, Vector3.down, out hit, checkingDistance))
+            if (hit0.collider.GetComponentInParent<ContainerLoaderController>())
             {
-                var distanceToGround = hit.distance;
-                heldObject.transform.position = new Vector3(boxPlacement.transform.position.x, 
-                    boxPlacement.transform.position.y - hit.distance + 0.5f, 
-                    boxPlacement.transform.position.z);
-                heldObject.transform.parent = null;
-                heldObject.transform.rotation =
-                    transform.rotation * heldObject.GetComponent<ContainerController>().origRotation;
+                hit0.collider.GetComponentInParent<ContainerLoaderController>().Place(heldObject);
+                heldObject.GetComponent<ContainerController>().PlaceInCharger();
+                heldObject = null;
+                return;
+            }
+
+            if (hit0.collider.GetComponentInParent<PressablePlate>())
+            {
+                hit0.collider.GetComponentInParent<PressablePlate>().Place(heldObject);
                 heldObject.GetComponent<ContainerController>().Place();
                 heldObject = null;
+                return;
             }
         }
+
+        Collider[] hitColliders = Physics.OverlapBox(boxPlacement.transform.position,
+                boxPlacement.transform.localScale / 2, Quaternion.identity, maskWithoutBox);
+
+            if (hitColliders.Length == 0)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(boxPlacement.transform.position, Vector3.down, out hit, checkingDistance))
+                {
+                    var distanceToGround = hit.distance;
+                    heldObject.transform.position = new Vector3(boxPlacement.transform.position.x,
+                        boxPlacement.transform.position.y - hit.distance + 0.5f,
+                        boxPlacement.transform.position.z);
+                    heldObject.transform.parent = null;
+                    heldObject.transform.rotation =
+                        transform.rotation * heldObject.GetComponent<ContainerController>().origRotation;
+                    heldObject.GetComponent<ContainerController>().Place();
+                    heldObject = null;
+                }
+            }
     }
 
     private void FixedUpdate()
@@ -182,6 +217,12 @@ public class PlayerMovement : MonoBehaviour
         {
             TryPlace();
             needsToPlace = false;
+        }
+
+        if (needsToShoot)
+        {
+            StartCoroutine(Shoot());
+            needsToShoot = false;
         }
     }
 
@@ -203,8 +244,50 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (hit.collider.GetComponentInParent<InteractableObject>())
             {
+                if (hit.collider.GetComponentInParent<PressablePlate>() && hit.collider.GetComponentInParent<PressablePlate>().hasContainer)
+                {
+                    ContainerController controller = hit.collider.GetComponentInChildren<ContainerController>();
+                    hit.collider.GetComponentInParent<InteractableObject>().Activate(false);
+                    controller.transform.parent = handheldObjectTransform;
+                    controller.transform.localPosition = Vector3.zero;
+                    controller.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    heldObject = controller.gameObject;
+                    return;
+                }
+
                 hit.collider.GetComponentInParent<InteractableObject>().Activate(false);
             }
+        }
+    }
+
+    IEnumerator Shoot()
+    {
+        canShoot = false;
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, shotDistance,
+            maskWithoutPlayer))
+        {
+            if (hit.collider.GetComponentInParent<Enemy>())
+                hit.collider.GetComponentInParent<Enemy>().Damage(bulletDamage);
+                
+        }
+        yield return new WaitForSeconds(shotDelay);
+        canShoot = true;
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "PlatformCollider" && other.GetComponentInParent<PressablePlate>())
+        {
+            other.GetComponentInParent<PressablePlate>().isActivated = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "PlatformCollider" && other.GetComponentInParent<PressablePlate>())
+        {
+            other.GetComponentInParent<PressablePlate>().isActivated = false;
         }
     }
 }
