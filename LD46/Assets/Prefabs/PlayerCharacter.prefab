@@ -756,7 +756,7 @@ MonoBehaviour:
   lookXLimit: 80
   slopeForceRayLength: 1.5
   slopeForce: 30
-  checkingDistance: 2
+  checkingDistance: 2.61
   shotDistance: 25
   transitSpeed: 5
   walkingCameraPos: {fileID: 1410566189}
