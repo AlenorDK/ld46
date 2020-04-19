@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using UnityEditor.Timeline;
 using UnityEngine;
 
 public class PressablePlate : InteractableObject

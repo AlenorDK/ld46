@@ -201,6 +201,11 @@ MonoBehaviour:
   anim: {fileID: 773391877}
   hitDownTime: 0.2
   respawnTime: 3
+  stoppingDistance: 2
+  searchTargetDelay: 5
+  stealingBoxTime: 3
+  damageAmount: 1
+  attackCooldown: 2
 --- !u!195 &705115941
 NavMeshAgent:
   m_ObjectHideFlags: 0

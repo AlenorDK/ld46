@@ -72,6 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 696411363}
   - component: {fileID: 696411364}
+  - component: {fileID: 943819240}
   m_Layer: 8
   m_Name: RightHand
   m_TagString: Untagged
@@ -87,7 +88,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696411362}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.103, y: -0.264, z: 0.6132901}
+  m_LocalPosition: {x: -0.06, y: -0.17, z: 0.86}
   m_LocalScale: {x: 0.09008973, y: 0.09008973, z: 0.09008973}
   m_Children: []
   m_Father: {fileID: 2024944116}
@@ -132,8 +133,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6827326222648780018, guid: e2ac42f6b8b07294abfdf1a842c84ffd,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: f3e2bb0639c75534181fa4c0006c274e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -144,6 +144,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &943819240
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696411362}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e7f712834b4524e0eaac15ce685aa56c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &708433444
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,6 +832,9 @@ MonoBehaviour:
   shotDelay: 0.2
   hands: {fileID: 2024944115}
   bulletDamage: 1
+  health: 3
+  isAlive: 1
+  anim: {fileID: 943819240}
 --- !u!54 &6275162205150788657
 Rigidbody:
   m_ObjectHideFlags: 0

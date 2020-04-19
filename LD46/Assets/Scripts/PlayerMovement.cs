@@ -58,6 +58,12 @@ public class PlayerMovement : MonoBehaviour
     public GameObject hands;
 
     public int bulletDamage = 1;
+
+    public int health = 3;
+
+    public bool isAlive = true;
+
+    public Animator anim;
     
     void Start()
     {
@@ -72,9 +78,12 @@ public class PlayerMovement : MonoBehaviour
 
     private bool OnSlope()
     {
+        if (isJumping)
+            return false;
+        
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, slopeForceRayLength))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, charController.height / 2 * slopeForceRayLength))
         {
             if (hit.normal != Vector3.up)
                 return true;
@@ -87,6 +96,8 @@ public class PlayerMovement : MonoBehaviour
     {
         hands.SetActive(heldObject == null);
 
+        Debug.Log(charController.isGrounded);
+        
         if (Input.GetMouseButtonDown(0) && canShoot && heldObject == null)
             needsToShoot = true;
         
@@ -104,24 +115,6 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(JumpEvent());
         }
         
-        /*if (Input.GetKey(KeyCode.LeftControl))
-        {
-            currentState = PlayerState.Crouching;
-            currentCameraPos = crouchingCameraPos.position;
-            walkingCollider.SetActive(false);
-            crouchingCollider.SetActive(true);
-        }
-        else
-        {
-            currentState = PlayerState.Walking;
-            currentCameraPos = walkingCameraPos.position;
-            walkingCollider.SetActive(true);
-            crouchingCollider.SetActive(false);
-        }*/
-        
-        /*cam.transform.position =
-            Vector3.Lerp(cam.transform.position, currentCameraPos, transitSpeed * Time.deltaTime);*/
-
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         
@@ -263,6 +256,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Shoot()
     {
+        anim.SetTrigger("Shoot");
         canShoot = false;
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, shotDistance,
@@ -274,6 +268,17 @@ public class PlayerMovement : MonoBehaviour
         }
         yield return new WaitForSeconds(shotDelay);
         canShoot = true;
+    }
+
+    public void Damage(int incomingDamage)
+    {
+        health -= incomingDamage;
+
+        if (health <= 0)
+        {
+            isAlive = false;
+            Debug.Log("You died");
+        }
     }
     
     private void OnTriggerEnter(Collider other)

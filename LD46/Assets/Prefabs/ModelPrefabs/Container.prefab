@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4066989295687401312}
   - component: {fileID: 116469434182287234}
   - component: {fileID: 7984500719483430362}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container_Temperature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 2235554836664711997}
   - component: {fileID: 1503450835341108278}
   - component: {fileID: 4798914481082952208}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container_SmileIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 8063673981031410744}
   - component: {fileID: 2655035437288968527}
   - component: {fileID: 5576609174423351616}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,9 +249,9 @@ GameObject:
   - component: {fileID: 1213802246798452673}
   - component: {fileID: 5677156075758193243}
   - component: {fileID: 1251551199}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 7880829468142189988}
   - component: {fileID: 2012226396579659994}
   - component: {fileID: 943250838739716693}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container_SHADOW
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 574881554400395521}
   - component: {fileID: 7660828506274441874}
   - component: {fileID: 7906226279868500970}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Container_Energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
