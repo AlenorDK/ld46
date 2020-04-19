@@ -26,12 +26,17 @@ public class ButtonScript : InteractableObject
         }
         isPressed = !isPressed;
     }
-    
+
     void Update()
     {
-        targetPosition = isPressed ? openedPosition.position : closedPosition.position;
-        targetRotation = isPressed ? openedPosition.rotation : closedPosition.rotation;
-        button.transform.position = Vector3.Lerp(button.transform.position, targetPosition, lerpingSpeed * Time.deltaTime);
-        button.transform.rotation = Quaternion.Lerp(button.transform.rotation, targetRotation, lerpingSpeed * Time.deltaTime);
+        if (button != null)
+        {
+            targetPosition = isPressed ? openedPosition.position : closedPosition.position;
+            targetRotation = isPressed ? openedPosition.rotation : closedPosition.rotation;
+            button.transform.position =
+                Vector3.Lerp(button.transform.position, targetPosition, lerpingSpeed * Time.deltaTime);
+            button.transform.rotation =
+                Quaternion.Lerp(button.transform.rotation, targetRotation, lerpingSpeed * Time.deltaTime);
+        }
     }
 }
