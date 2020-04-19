@@ -19,7 +19,7 @@ public class TemperatureZone : MonoBehaviour
         
         else Gizmos.color = Color.gray;
         
-        Gizmos.DrawWireCube(transform.position, GetComponent<BoxCollider>().size);
+        Gizmos.DrawWireCube(GetComponent<BoxCollider>().center, GetComponent<BoxCollider>().size);
     }
 
    
