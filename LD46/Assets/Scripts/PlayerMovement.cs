@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
     {
         hands.SetActive(heldObject == null);
 
-        if (Input.GetMouseButtonDown(0) && canShoot)
+        if (Input.GetMouseButtonDown(0) && canShoot && heldObject == null)
             needsToShoot = true;
         
         if (Input.GetKeyDown(KeyCode.E))
@@ -174,6 +174,14 @@ public class PlayerMovement : MonoBehaviour
                 heldObject = null;
                 return;
             }
+
+            if (hit0.collider.GetComponentInParent<PressablePlate>())
+            {
+                hit0.collider.GetComponentInParent<PressablePlate>().Place(heldObject);
+                heldObject.GetComponent<ContainerController>().Place();
+                heldObject = null;
+                return;
+            }
         }
 
         Collider[] hitColliders = Physics.OverlapBox(boxPlacement.transform.position,
@@ -236,6 +244,17 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (hit.collider.GetComponentInParent<InteractableObject>())
             {
+                if (hit.collider.GetComponentInParent<PressablePlate>() && hit.collider.GetComponentInParent<PressablePlate>().hasContainer)
+                {
+                    ContainerController controller = hit.collider.GetComponentInChildren<ContainerController>();
+                    hit.collider.GetComponentInParent<InteractableObject>().Activate(false);
+                    controller.transform.parent = handheldObjectTransform;
+                    controller.transform.localPosition = Vector3.zero;
+                    controller.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    heldObject = controller.gameObject;
+                    return;
+                }
+
                 hit.collider.GetComponentInParent<InteractableObject>().Activate(false);
             }
         }
@@ -254,6 +273,22 @@ public class PlayerMovement : MonoBehaviour
         }
         yield return new WaitForSeconds(shotDelay);
         canShoot = true;
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "PlatformCollider" && other.GetComponentInParent<PressablePlate>())
+        {
+            other.GetComponentInParent<PressablePlate>().isActivated = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "PlatformCollider" && other.GetComponentInParent<PressablePlate>())
+        {
+            other.GetComponentInParent<PressablePlate>().isActivated = false;
+        }
     }
 }
 

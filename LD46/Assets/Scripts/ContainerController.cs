@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -106,10 +107,9 @@ public class ContainerController : InteractableObject
         isUncharging = false;
         Energy = Mathf.Clamp(Energy + chargingSpeed, 0f, 100f);
     }
-    
+
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.name);
         if (other.GetComponent<TemperatureZone>() != null)
         {
             Temperature += other.GetComponent<TemperatureZone>().TemperatureMod * Time.deltaTime;

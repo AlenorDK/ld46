@@ -9,4 +9,9 @@ public class InteractableObject : MonoBehaviour
     {
         
     }
+    
+    public virtual void SetState(bool State)
+    {
+        
+    }
 }
