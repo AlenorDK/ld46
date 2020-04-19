@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 823537592044901491}
   - component: {fileID: 4519954833421742138}
   - component: {fileID: 3072593450704638663}
+  - component: {fileID: 2367890714167546049}
   m_Layer: 0
   m_Name: Wall_1m_Roll180_01_Mesh
   m_TagString: Untagged
@@ -79,6 +80,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &2367890714167546049
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373614208499805432}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8079283021185884477, guid: 4d04639a78676194e9ca4c1da898142b, type: 3}
 --- !u!1 &5204031487446262678
 GameObject:
   m_ObjectHideFlags: 0
