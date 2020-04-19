@@ -532,7 +532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &353928149859993573
 Transform:
   m_ObjectHideFlags: 0
@@ -625,7 +625,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6275162204096961687
 Transform:
   m_ObjectHideFlags: 0
@@ -767,10 +767,10 @@ MonoBehaviour:
   currentState: 0
   maskWithoutPlayer:
     serializedVersion: 2
-    m_Bits: 51
+    m_Bits: 563
   maskWithoutBox:
     serializedVersion: 2
-    m_Bits: 51
+    m_Bits: 563
   heldObject: {fileID: 0}
   boxPlacement: {fileID: 708433444}
   verticalPlacement: 0.375
@@ -912,7 +912,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 567
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
