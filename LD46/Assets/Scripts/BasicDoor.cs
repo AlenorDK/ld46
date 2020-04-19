@@ -43,6 +43,11 @@ public class BasicDoor : InteractableObject
         targetRotation = isOpened ? openedPosition.rotation : closedPosition.rotation;
     }
 
+    public override void SetState(bool state)
+    {
+        isOpened = state;
+    }
+
     void Update()
     {
         targetPosition = isOpened ? openedPosition.position : closedPosition.position;
