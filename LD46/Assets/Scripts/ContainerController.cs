@@ -9,6 +9,7 @@ public class ContainerController : InteractableObject
     public bool isPickedUp = false;
 
     public Vector3 pickedUpScale;
+    public Vector3 origScale;
     public Quaternion origRotation;
 
     public float Energy = 100f;
@@ -30,6 +31,7 @@ public class ContainerController : InteractableObject
     void Start()
     {
         origRotation = transform.rotation;
+        origScale = transform.localScale;
     }
 
     void Update()
@@ -85,7 +87,7 @@ public class ContainerController : InteractableObject
         {
             child.gameObject.layer = 0;
         }
-        transform.localScale = Vector3.one;
+        transform.localScale = origScale;
         isPickedUp = false;
     }
     
