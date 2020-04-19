@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(JumpEvent());
         }
         
-        if (Input.GetKey(KeyCode.LeftControl))
+        /*if (Input.GetKey(KeyCode.LeftControl))
         {
             currentState = PlayerState.Crouching;
             currentCameraPos = crouchingCameraPos.position;
@@ -117,10 +117,10 @@ public class PlayerMovement : MonoBehaviour
             currentCameraPos = walkingCameraPos.position;
             walkingCollider.SetActive(true);
             crouchingCollider.SetActive(false);
-        }
+        }*/
         
-        cam.transform.position =
-            Vector3.Lerp(cam.transform.position, currentCameraPos, transitSpeed * Time.deltaTime);
+        /*cam.transform.position =
+            Vector3.Lerp(cam.transform.position, currentCameraPos, transitSpeed * Time.deltaTime);*/
 
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
