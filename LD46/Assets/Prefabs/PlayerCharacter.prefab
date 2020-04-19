@@ -87,7 +87,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696411362}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2, y: -0.35899997, z: 0.6132901}
+  m_LocalPosition: {x: 0.2, y: -0.205, z: 0.6132901}
   m_LocalScale: {x: 0.09008973, y: 0.09008973, z: 0.09008973}
   m_Children: []
   m_Father: {fileID: 2024944116}
@@ -132,16 +132,16 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6827326222648780018, guid: 5c8b65e48e0c13249984bdf1e93a075c,
+  m_Sprite: {fileID: 6827326222648780018, guid: e2ac42f6b8b07294abfdf1a842c84ffd,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.91, y: 4.12}
+  m_Size: {x: 3.91, y: 4.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &708433444
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 7560625719766982188}
   m_Layer: 2
   m_Name: BoxPlacement
-  m_TagString: Untagged
+  m_TagString: BoxPlacementTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -188,6 +188,50 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &714994026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 714994027}
+  - component: {fileID: 714994028}
+  m_Layer: 2
+  m_Name: PlatformCollider
+  m_TagString: PlatformCollider
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &714994027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714994026}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.771, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8914670032691960481}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &714994028
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714994026}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 0.4, z: 0.8}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &794872207
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +257,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 794872207}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.232, y: -0.37342, z: 0.63490987}
+  m_LocalPosition: {x: -0.232, y: -0.219, z: 0.63490987}
   m_LocalScale: {x: 0.09008973, y: 0.09008973, z: 0.09008973}
   m_Children: []
   m_Father: {fileID: 2024944116}
@@ -258,16 +302,16 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5876286975845379578, guid: 5c8b65e48e0c13249984bdf1e93a075c,
+  m_Sprite: {fileID: -5876286975845379578, guid: e2ac42f6b8b07294abfdf1a842c84ffd,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.89, y: 4.07}
+  m_Size: {x: 3.91, y: 4.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1255623235
@@ -466,6 +510,7 @@ Transform:
   m_Children:
   - {fileID: 353928149859993573}
   - {fileID: 6275162204096961687}
+  - {fileID: 714994027}
   m_Father: {fileID: 6275162205150788668}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -670,7 +715,7 @@ GameObject:
   - component: {fileID: 6275162205150788656}
   m_Layer: 2
   m_Name: PlayerCharacter
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -728,6 +773,7 @@ MonoBehaviour:
     m_Bits: 51
   heldObject: {fileID: 0}
   boxPlacement: {fileID: 708433444}
+  verticalPlacement: 0.375
   handheldObjectTransform: {fileID: 26487173}
   jumpFallOff:
     serializedVersion: 2
