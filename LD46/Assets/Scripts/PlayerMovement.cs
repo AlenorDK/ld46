@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public float slopeForceRayLength;
     public float slopeForce;
     public float checkingDistance = 5f;
+    public float shotDistance = 25f;
 
     public float transitSpeed = 5f;
 
@@ -51,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
 
     public bool canShoot = true;
     public float shotDelay = 0.5f;
+
+    public GameObject hands;
     
     void Start()
     {
@@ -78,6 +81,8 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
+        hands.SetActive(heldObject == null);
+
         if (Input.GetMouseButtonDown(0) && canShoot)
             StartCoroutine(Shoot());
         
@@ -230,7 +235,14 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator Shoot()
     {
         canShoot = false;
-        Debug.Log("Shoot");
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, shotDistance,
+            maskWithoutPlayer))
+        {
+            if (hit.collider.GetComponentInParent<Enemy>())
+                hit.collider.GetComponentInParent<Enemy>().Damage(3);
+                
+        }
         yield return new WaitForSeconds(shotDelay);
         canShoot = true;
     }
