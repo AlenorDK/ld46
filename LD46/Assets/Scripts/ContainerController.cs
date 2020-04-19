@@ -104,7 +104,7 @@ public class ContainerController : InteractableObject
     public void Charge(float chargingSpeed)
     {
         isUncharging = false;
-        Energy += chargingSpeed;
+        Energy = Mathf.Clamp(Energy + chargingSpeed, 0f, 100f);
     }
     
     private void OnTriggerStay(Collider other)

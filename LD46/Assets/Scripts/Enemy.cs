@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private int health = 3;
-
+    public int minHealth = 3;
+    public int maxHealth = 5;
+    public int health = 3;
+    
+    void Start()
+    {
+        health = Random.Range(minHealth, maxHealth + 1);
+    }
+    
     public void Damage(int dmg)
     {
         health -= dmg;

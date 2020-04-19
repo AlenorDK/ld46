@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool needsToInteract = false;
     private bool needsToPlace = false;
+    private bool needsToShoot = false;
 
     private bool isJumping;
 
@@ -54,6 +55,8 @@ public class PlayerMovement : MonoBehaviour
     public float shotDelay = 0.5f;
 
     public GameObject hands;
+
+    public int bulletDamage = 1;
     
     void Start()
     {
@@ -84,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         hands.SetActive(heldObject == null);
 
         if (Input.GetMouseButtonDown(0) && canShoot)
-            StartCoroutine(Shoot());
+            needsToShoot = true;
         
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -207,6 +210,12 @@ public class PlayerMovement : MonoBehaviour
             TryPlace();
             needsToPlace = false;
         }
+
+        if (needsToShoot)
+        {
+            StartCoroutine(Shoot());
+            needsToShoot = false;
+        }
     }
 
     void Interact()
@@ -240,7 +249,7 @@ public class PlayerMovement : MonoBehaviour
             maskWithoutPlayer))
         {
             if (hit.collider.GetComponentInParent<Enemy>())
-                hit.collider.GetComponentInParent<Enemy>().Damage(3);
+                hit.collider.GetComponentInParent<Enemy>().Damage(bulletDamage);
                 
         }
         yield return new WaitForSeconds(shotDelay);
