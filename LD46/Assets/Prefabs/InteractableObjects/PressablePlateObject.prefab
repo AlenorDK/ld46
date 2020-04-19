@@ -82,8 +82,7 @@ MonoBehaviour:
   UpPosition: {fileID: 8827611056925402409}
   DownPosition: {fileID: 8827611055850466062}
   lerpingSpeed: 5
-  _gameObjects:
-  - {fileID: 0}
+  _gameObjects: []
 --- !u!1 &8827611056555491720
 GameObject:
   m_ObjectHideFlags: 0

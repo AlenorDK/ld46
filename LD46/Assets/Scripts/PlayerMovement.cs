@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     
     public GameObject heldObject;
     public GameObject boxPlacement;
+    public float verticalPlacement;
     public Transform handheldObjectTransform;
 
     private bool needsToInteract = false;
@@ -194,7 +195,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     var distanceToGround = hit.distance;
                     heldObject.transform.position = new Vector3(boxPlacement.transform.position.x,
-                        boxPlacement.transform.position.y - hit.distance + 0.5f,
+                        boxPlacement.transform.position.y - hit.distance + verticalPlacement,
                         boxPlacement.transform.position.z);
                     heldObject.transform.parent = null;
                     heldObject.transform.rotation =
