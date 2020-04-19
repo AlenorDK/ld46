@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 4357380953330361181}
   - component: {fileID: 1688640661583000423}
   - component: {fileID: 4558038302248950189}
+  - component: {fileID: 1553942172994786597}
   m_Layer: 0
   m_Name: Wall_roll90_ins_01_mesh
   m_TagString: Untagged
@@ -110,3 +111,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &1553942172994786597
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5065041927758888362}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5727029922718703691, guid: 8ddaa7f9f45f16d4c9bb09fab2141d17, type: 3}
