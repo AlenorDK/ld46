@@ -79,11 +79,11 @@ public class Enemy : MonoBehaviour
             agent.SetDestination(transform.position);
         }
 
-        if (state == EnemyState.MovingToPlayer && agent.remainingDistance <= agent.stoppingDistance)
+        if (state == EnemyState.MovingToPlayer && agent.remainingDistance <= agent.stoppingDistance && agent.pathStatus == NavMeshPathStatus.PathComplete)
         {
             StartCoroutine(AttackPlayer());
         }
-        else if (state == EnemyState.MovingToBox && agent.remainingDistance <= agent.stoppingDistance)
+        else if (state == EnemyState.MovingToBox && agent.remainingDistance <= agent.stoppingDistance && agent.pathStatus == NavMeshPathStatus.PathComplete)
             StartCoroutine(StealBox());
     }
 
