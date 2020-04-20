@@ -81,6 +81,10 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip[] shots, hits, deaths;
 
     public GameObject box;
+
+    public GameObject HealthBar;
+
+    public Sprite fullHeart, nullHeart;
     
     void Start()
     {
@@ -113,6 +117,8 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()
     {
+        UpdateHealthBar();
+        
         hands.SetActive(heldObject == null);
         
         if (Input.GetMouseButtonDown(0) && canShoot && heldObject == null)
@@ -129,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
         if (box.GetComponent<ContainerController>().Energy <= 0 && isAlive)
         {
             src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
-            src.volume = 0.4f;
+            src.volume = 0.3f;
             src.PlayOneShot(deaths[UnityEngine.Random.Range(0, shots.Length)]);
             StartCoroutine(Die());
         }
@@ -235,6 +241,14 @@ public class PlayerMovement : MonoBehaviour
             }
     }
 
+    public void UpdateHealthBar()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            HealthBar.transform.GetChild(i).GetComponent<Image>().sprite = health > i ? fullHeart : nullHeart;
+        }
+    }
+    
     private void FixedUpdate()
     {
         if (needsToInteract)
@@ -296,7 +310,7 @@ public class PlayerMovement : MonoBehaviour
         canShoot = false;
         RaycastHit hit;
         src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
-        src.volume = 0.4f;
+        src.volume = 0.3f;
         src.PlayOneShot(shots[UnityEngine.Random.Range(0, shots.Length)]);
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, shotDistance,
             maskWithoutPlayer))
@@ -311,12 +325,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void Damage(int incomingDamage)
     {
-        health -= incomingDamage;
+        if (health > 0)
+            health -= incomingDamage;
 
         if (health >= 0)
         {
             src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
-            src.volume = 0.4f;
+            src.volume = 0.3f;
             src.PlayOneShot(hits[UnityEngine.Random.Range(0, shots.Length)]);
         }
 
@@ -328,8 +343,9 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Die()
     {
+        HealthBar.transform.GetChild(0).GetComponent<Image>().sprite = nullHeart;
         src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
-        src.volume = 0.4f;
+        src.volume = 0.3f;
         src.PlayOneShot(deaths[UnityEngine.Random.Range(0, shots.Length)]);
         isAlive = false;
         movementSpeed = 0f;

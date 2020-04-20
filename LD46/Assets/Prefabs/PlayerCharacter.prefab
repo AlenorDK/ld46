@@ -855,6 +855,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fba2d579086b2c444be62cb371a1473e, type: 3}
   - {fileID: 8300000, guid: 0a8e6eeccfa99e14fae0ca26c0ad6b12, type: 3}
   box: {fileID: 0}
+  HealthBar: {fileID: 0}
+  fullHeart: {fileID: -5185649437945853404, guid: f7c07a98873f7f34a87a92ae11daee5d,
+    type: 3}
+  nullHeart: {fileID: -3447507480621012285, guid: f7c07a98873f7f34a87a92ae11daee5d,
+    type: 3}
 --- !u!54 &6275162205150788657
 Rigidbody:
   m_ObjectHideFlags: 0

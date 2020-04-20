@@ -155,7 +155,7 @@ public class Enemy : MonoBehaviour
         if (health > 0)
         {
             src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
-            src.volume = 0.3f;
+            src.volume = 0.2f;
             src.PlayOneShot(hurts[UnityEngine.Random.Range(0, hurts.Length)]);
             StartCoroutine(PlayHit());
         }
@@ -163,7 +163,7 @@ public class Enemy : MonoBehaviour
         else if (health <= 0 && state != EnemyState.Down)
         {
             src.pitch = 0.7f;
-            src.volume = 0.3f;
+            src.volume = 0.2f;
             src.PlayOneShot(deaths[UnityEngine.Random.Range(0, deaths.Length)]);
             StartCoroutine(PlayDown());
         }
@@ -175,12 +175,12 @@ public class Enemy : MonoBehaviour
         do
         {
             src.pitch = UnityEngine.Random.Range(0.7f, 1.3f);
-            src.volume = 0.4f;
+            src.volume = 0.3f;
             src.PlayOneShot(attacks[UnityEngine.Random.Range(0, attacks.Length)]);
 
             playerObj.GetComponent<PlayerMovement>().Damage(damageAmount);
             yield return new WaitForSeconds(attackCooldown);
-        } while (health > 0 && Vector3.Distance(transform.position, playerObj.transform.position) < 3f);
+        } while (playerObj.GetComponent<PlayerMovement>().health > 0 && health > 0 && Vector3.Distance(transform.position, playerObj.transform.position) < 3f);
         FindTarget();
     }
 
@@ -193,7 +193,7 @@ public class Enemy : MonoBehaviour
         boxObj.GetComponent<ContainerController>().stealingBox2.Play();
         
         src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
-        src.volume = 0.4f;
+        src.volume = 0.3f;
         src.PlayOneShot(teleportsBox[UnityEngine.Random.Range(0, teleportsBox.Length)]);
         
         while (stealingTime < stealingBoxTime && state == EnemyState.AttackBox && health > 0)
