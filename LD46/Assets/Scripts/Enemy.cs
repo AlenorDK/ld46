@@ -31,6 +31,9 @@ public class Enemy : MonoBehaviour
     public float attackCooldown = 1f;
 
     public ParticleSystem blood;
+
+    public AudioSource src;
+    public AudioClip[] attacks, hurts, deaths, ressurects, teleportsBox;
     
     void Start()
     {
@@ -82,11 +85,11 @@ public class Enemy : MonoBehaviour
             agent.SetDestination(transform.position);
         }
 
-        if (state == EnemyState.MovingToPlayer && agent.remainingDistance <= agent.stoppingDistance && agent.pathStatus == NavMeshPathStatus.PathComplete)
+        if (state == EnemyState.MovingToPlayer && agent.remainingDistance != 0 && agent.remainingDistance <= agent.stoppingDistance && agent.pathStatus == NavMeshPathStatus.PathComplete)
         {
             StartCoroutine(AttackPlayer());
         }
-        else if (state == EnemyState.MovingToBox && agent.remainingDistance <= agent.stoppingDistance && agent.pathStatus == NavMeshPathStatus.PathComplete)
+        else if (state == EnemyState.MovingToBox && agent.remainingDistance != 0 && agent.remainingDistance <= agent.stoppingDistance && agent.pathStatus == NavMeshPathStatus.PathComplete)
             StartCoroutine(StealBox());
     }
 
@@ -146,15 +149,22 @@ public class Enemy : MonoBehaviour
     
     public void Damage(int dmg)
     {
+
         blood.Play();
         health -= dmg;
         if (health > 0)
         {
+            src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+            src.volume = 0.3f;
+            src.PlayOneShot(hurts[UnityEngine.Random.Range(0, hurts.Length)]);
             StartCoroutine(PlayHit());
         }
 
         else if (health <= 0 && state != EnemyState.Down)
         {
+            src.pitch = 0.7f;
+            src.volume = 0.3f;
+            src.PlayOneShot(deaths[UnityEngine.Random.Range(0, deaths.Length)]);
             StartCoroutine(PlayDown());
         }
     }
@@ -164,6 +174,10 @@ public class Enemy : MonoBehaviour
         state = EnemyState.AttackPlayer;
         do
         {
+            src.pitch = UnityEngine.Random.Range(0.7f, 1.3f);
+            src.volume = 0.4f;
+            src.PlayOneShot(attacks[UnityEngine.Random.Range(0, attacks.Length)]);
+
             playerObj.GetComponent<PlayerMovement>().Damage(damageAmount);
             yield return new WaitForSeconds(attackCooldown);
         } while (health > 0 && Vector3.Distance(transform.position, playerObj.transform.position) < 3f);
@@ -177,6 +191,10 @@ public class Enemy : MonoBehaviour
         
         boxObj.GetComponent<ContainerController>().stealingBox1.Play();
         boxObj.GetComponent<ContainerController>().stealingBox2.Play();
+        
+        src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+        src.volume = 0.4f;
+        src.PlayOneShot(teleportsBox[UnityEngine.Random.Range(0, teleportsBox.Length)]);
         
         while (stealingTime < stealingBoxTime && state == EnemyState.AttackBox && health > 0)
         {
@@ -207,6 +225,9 @@ public class Enemy : MonoBehaviour
         state = EnemyState.Down;
         anim.SetTrigger("Down");
         yield return new WaitForSeconds(respawnTime);
+        src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+        src.volume = 0.15f;
+        src.PlayOneShot(ressurects[UnityEngine.Random.Range(0, ressurects.Length)]);
         FindTarget();
         health = Random.Range(minHealth, maxHealth + 1);
         anim.SetTrigger("Walk");

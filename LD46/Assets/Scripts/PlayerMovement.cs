@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = System.Random;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -76,6 +77,11 @@ public class PlayerMovement : MonoBehaviour
 
     public TextMeshProUGUI subs;
 
+    public AudioSource src;
+    public AudioClip[] shots, hits, deaths;
+
+    public GameObject box;
+    
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -85,6 +91,8 @@ public class PlayerMovement : MonoBehaviour
         cam = GetComponentInChildren<Camera>();
 
         currentCameraPos = cam.transform.position;
+        
+        box = GameObject.FindGameObjectWithTag("Box");
     }
 
     private bool OnSlope()
@@ -118,6 +126,14 @@ public class PlayerMovement : MonoBehaviour
                 needsToInteract = true;
         }
 
+        if (box.GetComponent<ContainerController>().Energy <= 0 && isAlive)
+        {
+            src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+            src.volume = 0.4f;
+            src.PlayOneShot(deaths[UnityEngine.Random.Range(0, shots.Length)]);
+            StartCoroutine(Die());
+        }
+        
         if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
             isJumping = true;
@@ -279,6 +295,9 @@ public class PlayerMovement : MonoBehaviour
         anim.SetTrigger("Shoot");
         canShoot = false;
         RaycastHit hit;
+        src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+        src.volume = 0.4f;
+        src.PlayOneShot(shots[UnityEngine.Random.Range(0, shots.Length)]);
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, shotDistance,
             maskWithoutPlayer))
         {
@@ -294,6 +313,13 @@ public class PlayerMovement : MonoBehaviour
     {
         health -= incomingDamage;
 
+        if (health >= 0)
+        {
+            src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+            src.volume = 0.4f;
+            src.PlayOneShot(hits[UnityEngine.Random.Range(0, shots.Length)]);
+        }
+
         if (health <= 0 && isAlive)
         {
             StartCoroutine(Die());
@@ -302,6 +328,9 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Die()
     {
+        src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+        src.volume = 0.4f;
+        src.PlayOneShot(deaths[UnityEngine.Random.Range(0, shots.Length)]);
         isAlive = false;
         movementSpeed = 0f;
         lookSpeed = 0f;
