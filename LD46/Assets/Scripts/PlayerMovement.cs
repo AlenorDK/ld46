@@ -2,8 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -64,7 +69,13 @@ public class PlayerMovement : MonoBehaviour
     public bool isAlive = true;
 
     public Animator anim;
-    
+
+    public float lerpingSpeed = 5f;
+    public Image fade;
+    public GameObject[] GameOverTexts;
+
+    public TextMeshProUGUI subs;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -95,8 +106,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         hands.SetActive(heldObject == null);
-
-        //Debug.Log(charController.isGrounded);
         
         if (Input.GetMouseButtonDown(0) && canShoot && heldObject == null)
             needsToShoot = true;
@@ -135,6 +144,17 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         
         Debug.DrawRay(cam.transform.position, cam.transform.forward * checkingDistance, Color.red);
+
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward * 5f, out hit, maskWithoutPlayer))
+        {
+            if (hit.collider.GetComponent<Subtitles>())
+                subs.text = hit.collider.GetComponent<Subtitles>().text;
+            else
+            {
+                subs.text = "";
+            }
+        }
     }
 
     private IEnumerator JumpEvent()
@@ -274,11 +294,47 @@ public class PlayerMovement : MonoBehaviour
     {
         health -= incomingDamage;
 
-        if (health <= 0)
+        if (health <= 0 && isAlive)
         {
-            isAlive = false;
-            Debug.Log("You died");
+            StartCoroutine(Die());
         }
+    }
+
+    IEnumerator Die()
+    {
+        isAlive = false;
+        movementSpeed = 0f;
+        lookSpeed = 0f;
+        canShoot = false;
+        float deathTime = 0f;
+        while (deathTime < 2f)
+        {
+            deathTime += Time.deltaTime;
+            yield return null;
+            transform.rotation = Quaternion.Lerp(transform.rotation,
+                Quaternion.Euler(new Vector3(transform.rotation.x, transform.rotation.y, -90f)),
+                lerpingSpeed * Time.deltaTime);
+        }
+
+        StartCoroutine(StartFade());
+    }
+
+    IEnumerator StartFade()
+    {
+        float fadeTime = 0f;
+        TextMeshProUGUI randomText = GameOverTexts[UnityEngine.Random.Range(0, GameOverTexts.Length)].GetComponent<TextMeshProUGUI>();
+        while (fadeTime < 3f)
+        {
+            fadeTime += Time.deltaTime;
+            yield return null;
+            
+            randomText.color = new Color(randomText.color.r, randomText.color.g, randomText.color.b,
+                Mathf.Lerp(randomText.color.a, 1, lerpingSpeed * Time.deltaTime));
+            fade.color = new Color(fade.color.r, fade.color.g, fade.color.b,
+                Mathf.Lerp(fade.color.a, 1, lerpingSpeed * Time.deltaTime));
+        }
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
     private void OnTriggerEnter(Collider other)
