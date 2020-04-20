@@ -413,7 +413,6 @@ MonoBehaviour:
   m_IgnoreReversedGraphics: 1
   m_BlockingObjects: 0
   m_BlockingMask:
-    serializedVersion: 2
     m_Bits: 4294967295
 --- !u!114 &177425695
 MonoBehaviour:
@@ -854,6 +853,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1728794091}
     m_Modifications:
+    - target: {fileID: 857295079, guid: 6104ab3f0c2034d29992221659e1544f, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 857295081, guid: 6104ab3f0c2034d29992221659e1544f, type: 3}
       propertyPath: m_textInfo.characterCount
       value: 0
@@ -874,10 +877,20 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9016524290750529887, guid: 6104ab3f0c2034d29992221659e1544f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 9016524291101155072, guid: 6104ab3f0c2034d29992221659e1544f,
         type: 3}
       propertyPath: m_Name
       value: ButtonObject (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016524291101155072, guid: 6104ab3f0c2034d29992221659e1544f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 9016524291101155078, guid: 6104ab3f0c2034d29992221659e1544f,
         type: 3}
@@ -968,6 +981,21 @@ PrefabInstance:
         type: 3}
       propertyPath: connectedObjects.Array.data[2]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016524291453442056, guid: 6104ab3f0c2034d29992221659e1544f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016524291499099899, guid: 6104ab3f0c2034d29992221659e1544f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016524291738777872, guid: 6104ab3f0c2034d29992221659e1544f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 9016524291738777879, guid: 6104ab3f0c2034d29992221659e1544f,
         type: 3}
@@ -1239,7 +1267,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1252,25 +1284,42 @@ MonoBehaviour:
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
-    serializedVersion: 2
     rgba: 4294914304
-  m_fontColor: {r: 0, g: 0.19188643, b: 1, a: 1}
+  m_fontColor:
+    r: 0
+    g: 0.19188643
+    b: 1
+    a: 1
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+    topLeft:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    topRight:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    bottomLeft:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    bottomRight:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_overrideHtmlColors: 0
   m_faceColor:
-    serializedVersion: 2
     rgba: 4294967295
   m_outlineColor:
-    serializedVersion: 2
     rgba: 4278190080
   m_fontSize: 7.5
   m_fontSizeBase: 7.5
@@ -1311,16 +1360,8 @@ MonoBehaviour:
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
   m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_textInfo:
-    textComponent: {fileID: 1432302835}
-    characterCount: 4
-    spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
-    linkCount: 0
-    lineCount: 1
-    pageCount: 1
-    materialCount: 1
+  m_textInfo: {textComponent: {fileID: 1432302835}, characterCount: 4, spriteCount: 0,
+    spaceCount: 0, wordCount: 1, linkCount: 0, lineCount: 1, pageCount: 1, materialCount: 1}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -1486,13 +1527,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610792248}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: -0.38268343, z: 0.92387956, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 6}
   m_LocalScale: {x: 10, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 460069128}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 180}
 --- !u!65 &1610792250
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1524,7 +1565,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f47b7e5dcf5ba440a81a7b1c5929f5b0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1672,7 +1713,7 @@ RectTransform:
   m_GameObject: {fileID: 1723868666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 177425697}
   m_RootOrder: 0
@@ -1695,12 +1736,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 0c839d3377811de41bf96eef0982015f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1777,7 +1822,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1790,25 +1839,42 @@ MonoBehaviour:
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
-    serializedVersion: 2
     rgba: 4278190335
-  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
+  m_fontColor:
+    r: 1
+    g: 0
+    b: 0
+    a: 1
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+    topLeft:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    topRight:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    bottomLeft:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
+    bottomRight:
+      r: 1
+      g: 1
+      b: 1
+      a: 1
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_overrideHtmlColors: 0
   m_faceColor:
-    serializedVersion: 2
     rgba: 4294967295
   m_outlineColor:
-    serializedVersion: 2
     rgba: 4278190080
   m_fontSize: 7.5
   m_fontSizeBase: 7.5
@@ -1849,16 +1915,8 @@ MonoBehaviour:
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
   m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_textInfo:
-    textComponent: {fileID: 1835895229}
-    characterCount: 3
-    spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
-    linkCount: 0
-    lineCount: 1
-    pageCount: 1
-    materialCount: 1
+  m_textInfo: {textComponent: {fileID: 1835895229}, characterCount: 3, spriteCount: 0,
+    spaceCount: 0, wordCount: 1, linkCount: 0, lineCount: 1, pageCount: 1, materialCount: 1}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -2224,35 +2282,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2890360177910933419, guid: 3d56a85f66578f04bb23af8e32987240,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2935138267447018282, guid: 3d56a85f66578f04bb23af8e32987240,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3940283243112916238, guid: 3d56a85f66578f04bb23af8e32987240,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 6747808785269198863, guid: 3d56a85f66578f04bb23af8e32987240,
         type: 3}
       propertyPath: m_Name
       value: Container
-      objectReference: {fileID: 0}
-    - target: {fileID: 6747808785269198863, guid: 3d56a85f66578f04bb23af8e32987240,
-        type: 3}
-      propertyPath: m_TagString
-      value: Box
-      objectReference: {fileID: 0}
-    - target: {fileID: 6747808785269198863, guid: 3d56a85f66578f04bb23af8e32987240,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7781746877907460636, guid: 3d56a85f66578f04bb23af8e32987240,
         type: 3}
@@ -2309,16 +2342,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8420990798442824397, guid: 3d56a85f66578f04bb23af8e32987240,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 9104072927887992316, guid: 3d56a85f66578f04bb23af8e32987240,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d56a85f66578f04bb23af8e32987240, type: 3}
 --- !u!1001 &421537750394832256
@@ -2328,10 +2351,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 421537749615443992, guid: 933726f08780f4758b704d278a5dec04,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 421537749626335585, guid: 933726f08780f4758b704d278a5dec04,
         type: 3}
       propertyPath: m_Name
       value: ElevatorObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 421537749626335585, guid: 933726f08780f4758b704d278a5dec04,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 421537749626335587, guid: 933726f08780f4758b704d278a5dec04,
         type: 3}
@@ -2346,7 +2379,7 @@ PrefabInstance:
     - target: {fileID: 421537749626335587, guid: 933726f08780f4758b704d278a5dec04,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 32.1
+      value: 31.83
       objectReference: {fileID: 0}
     - target: {fileID: 421537749626335587, guid: 933726f08780f4758b704d278a5dec04,
         type: 3}
@@ -2392,6 +2425,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 421537750098018181, guid: 933726f08780f4758b704d278a5dec04,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 421537750814607466, guid: 933726f08780f4758b704d278a5dec04,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 421537750814607467, guid: 933726f08780f4758b704d278a5dec04,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 421537751119325343, guid: 933726f08780f4758b704d278a5dec04,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 933726f08780f4758b704d278a5dec04, type: 3}
@@ -2647,16 +2700,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8731099649621605730, guid: b3da160160f4b42128d8119d41597bf8,
-        type: 3}
-      propertyPath: stoppingDistance
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8731099649621605730, guid: b3da160160f4b42128d8119d41597bf8,
-        type: 3}
-      propertyPath: searchTargetDelay
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8731099649621605731, guid: b3da160160f4b42128d8119d41597bf8,
         type: 3}
       propertyPath: m_LocalPosition.x

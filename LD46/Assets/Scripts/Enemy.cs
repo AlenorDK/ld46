@@ -24,6 +24,10 @@ public class Enemy : MonoBehaviour
     public float stoppingDistance = 3f;
 
     public float searchTargetDelay = 2f;
+
+    public float stealingBoxTime = 3f;
+    public int damageAmount = 1;
+    public float attackCooldown = 1f;
     
     void Start()
     {
@@ -38,20 +42,26 @@ public class Enemy : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(searchTargetDelay);
-            if (state == EnemyState.MovingToPlayer || state == EnemyState.MovingToBox)
+            if (state == EnemyState.MovingToPlayer || state == EnemyState.MovingToBox || state == EnemyState.Idle)
                 FindTarget();
         }
     }
 
     void Update()
     {
-        if (agent.path == null)
+        playerObj = GameObject.FindGameObjectWithTag("Player");
+        boxObj = GameObject.FindWithTag("Box");
+
+        if (boxObj == null || playerObj == null)
+        {
+            Debug.Log("Player or container not present.");
+            return;
+        }
+
+        if (agent.path == null || agent.pathStatus != NavMeshPathStatus.PathComplete)
         {
             FindTarget();
         }
-        
-        playerObj = GameObject.FindGameObjectWithTag("Player");
-        boxObj = GameObject.FindWithTag("Box");
         
         transform.rotation = Quaternion.LookRotation(-Camera.main.transform.forward);
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
@@ -68,24 +78,35 @@ public class Enemy : MonoBehaviour
         {
             agent.SetDestination(transform.position);
         }
+
+        if (state == EnemyState.MovingToPlayer && agent.remainingDistance <= agent.stoppingDistance && agent.pathStatus == NavMeshPathStatus.PathComplete)
+        {
+            StartCoroutine(AttackPlayer());
+        }
+        else if (state == EnemyState.MovingToBox && agent.remainingDistance <= agent.stoppingDistance && agent.pathStatus == NavMeshPathStatus.PathComplete)
+            StartCoroutine(StealBox());
     }
 
     void FindTarget()
     {
         NavMeshPath pathToPlayer = new NavMeshPath();
         agent.CalculatePath(playerObj.transform.position, pathToPlayer);
-        
-        Vector3 previousCorner = pathToPlayer.corners[0];
+
         float lengthToPlayer = 0.0F;
-        int i = 1;
-        while (i < pathToPlayer.corners.Length) {
-            Vector3 currentCorner = pathToPlayer.corners[i];
-            lengthToPlayer += Vector3.Distance(previousCorner, currentCorner);
-            previousCorner = currentCorner;
-            i++;
+        if (pathToPlayer.corners.Length > 0)
+        {
+            Vector3 previousCorner = pathToPlayer.corners[0];
+            int i = 1;
+            while (i < pathToPlayer.corners.Length)
+            {
+                Vector3 currentCorner = pathToPlayer.corners[i];
+                lengthToPlayer += Vector3.Distance(previousCorner, currentCorner);
+                previousCorner = currentCorner;
+                i++;
+            }
         }
-        
-        
+
+
         NavMeshPath pathToBox = new NavMeshPath();
         agent.CalculatePath(boxObj.transform.position, pathToBox);
         
@@ -102,12 +123,21 @@ public class Enemy : MonoBehaviour
                 j++;
             }
         }
-            
-        Debug.Log(lengthToPlayer + " " + lengthToBox);
-        
-        if (lengthToPlayer < lengthToBox)
+
+        if (lengthToBox == 0 && lengthToPlayer == 0)
+        {
+            state = EnemyState.Idle;
+            anim.SetTrigger("Idle");
+        }
+        else if (lengthToBox == 0)
             state = EnemyState.MovingToPlayer;
-        else 
+        else if (lengthToPlayer == 0)
+            state = EnemyState.MovingToBox;
+        else if (lengthToBox > lengthToPlayer)
+        {
+            state = EnemyState.MovingToPlayer;
+        }
+        else
             state = EnemyState.MovingToBox;
     }
     
@@ -122,6 +152,34 @@ public class Enemy : MonoBehaviour
         else if (health <= 0 && state != EnemyState.Down)
         {
             StartCoroutine(PlayDown());
+        }
+    }
+
+    IEnumerator AttackPlayer()
+    {
+        state = EnemyState.AttackPlayer;
+        do
+        {
+            playerObj.GetComponent<PlayerMovement>().Damage(damageAmount);
+            yield return new WaitForSeconds(attackCooldown);
+        } while (health > 0 && Vector3.Distance(transform.position, playerObj.transform.position) < 3f);
+        FindTarget();
+    }
+
+    IEnumerator StealBox()
+    {
+        state = EnemyState.AttackBox;
+        float stealingTime = 0f;
+
+        while (stealingTime < stealingBoxTime && state == EnemyState.AttackBox && health > 0)
+        {
+            stealingTime += Time.deltaTime;
+            yield return null;
+        }
+
+        if (stealingTime >= stealingBoxTime)
+        {
+            Destroy(boxObj);
         }
     }
 
