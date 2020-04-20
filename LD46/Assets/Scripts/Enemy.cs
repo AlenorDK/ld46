@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
@@ -28,6 +29,8 @@ public class Enemy : MonoBehaviour
     public float stealingBoxTime = 3f;
     public int damageAmount = 1;
     public float attackCooldown = 1f;
+
+    public ParticleSystem blood;
     
     void Start()
     {
@@ -147,6 +150,7 @@ public class Enemy : MonoBehaviour
         if (health > 0)
         {
             StartCoroutine(PlayHit());
+            blood.Play();
         }
 
         else if (health <= 0 && state != EnemyState.Down)
@@ -170,13 +174,19 @@ public class Enemy : MonoBehaviour
     {
         state = EnemyState.AttackBox;
         float stealingTime = 0f;
-
+        
+        boxObj.GetComponent<ContainerController>().stealingBox1.Play();
+        boxObj.GetComponent<ContainerController>().stealingBox2.Play();
+        
         while (stealingTime < stealingBoxTime && state == EnemyState.AttackBox && health > 0)
         {
             stealingTime += Time.deltaTime;
             yield return null;
         }
-
+        
+        boxObj.GetComponent<ContainerController>().stealingBox1.Stop();
+        boxObj.GetComponent<ContainerController>().stealingBox2.Stop();
+        
         if (stealingTime >= stealingBoxTime)
         {
             Destroy(boxObj);

@@ -835,6 +835,12 @@ MonoBehaviour:
   health: 3
   isAlive: 1
   anim: {fileID: 943819240}
+  lerpingSpeed: 5
+  fade: {fileID: 0}
+  GameOverTexts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!54 &6275162205150788657
 Rigidbody:
   m_ObjectHideFlags: 0
