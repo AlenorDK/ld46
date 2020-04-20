@@ -36,6 +36,9 @@ public class ContainerController : InteractableObject
     public ParticleSystem stealingBox2;
 
     public TextMeshPro tempText;
+
+    public AudioSource src;
+    public AudioClip boxPut, alert;
     
     void Start()
     {
@@ -59,6 +62,22 @@ public class ContainerController : InteractableObject
         Temperature = Mathf.Clamp(Temperature, minTemperature, maxTemperature);
         TemperatureBar.GetComponent<MeshRenderer>().material.color = TemperatureGradient.Evaluate((Temperature + 50f) / 100f);
         tempText.text = ((int) Temperature).ToString();
+
+        if (Energy > 0f && Energy < 30f)
+        {
+            StartCoroutine(PlayAlert());
+        }
+    }
+
+    IEnumerator PlayAlert()
+    {
+        do
+        {
+            src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+            src.volume = 0.3f;
+            src.PlayOneShot(alert);
+            yield return new WaitForSeconds(2f);
+        } while (Energy > 0f && Energy < 30f);
     }
     
     public void PickUp()
@@ -81,6 +100,9 @@ public class ContainerController : InteractableObject
 
     public void Place()
     {
+        src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+        src.volume = 0.4f;
+        src.PlayOneShot(boxPut);
         StartCoroutine(TurnOffCollider());
     }
 

@@ -17,6 +17,10 @@ public class ContainerLoaderController : MonoBehaviour
     public bool isCharging = false;
 
     public float ChargingSpeed;
+
+    public AudioSource src;
+    public AudioClip chargeSound; 
+    
     void Start()
     {
         targetRotation = jackRotationOff;
@@ -33,6 +37,9 @@ public class ContainerLoaderController : MonoBehaviour
     IEnumerator StartCharging()
     {
         yield return new WaitForSeconds(1f);
+        src.pitch = 1f;
+        src.volume = 0.1f;
+        src.PlayOneShot(chargeSound);
         isCharging = true;
     }
     
@@ -42,6 +49,8 @@ public class ContainerLoaderController : MonoBehaviour
         loaderJack.transform.localRotation = Quaternion.Lerp(loaderJack.transform.localRotation, Quaternion.Euler(targetRotation), lerpingSpeed * Time.deltaTime);
 
         if (hasContainer && isCharging)
+        {
             GetComponentInChildren<ContainerController>().Charge(ChargingSpeed * Time.deltaTime);
+        }
     }
 }
