@@ -47,7 +47,7 @@ public class PillarPuzzleController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha5))
+        /*if (Input.GetKeyDown(KeyCode.Alpha5))
             Reset();
         
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -60,7 +60,7 @@ public class PillarPuzzleController : MonoBehaviour
             ActivateC();
         ;
         if (Input.GetKeyDown(KeyCode.Alpha4))
-            ActivateD();
+            ActivateD();*/
 
         pillarA.transform.position = Vector3.Lerp(pillarA.transform.position,
             new Vector3(pillarA.transform.position.x,
