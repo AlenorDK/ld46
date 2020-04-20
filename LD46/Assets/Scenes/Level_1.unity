@@ -6368,6 +6368,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ad4770b0fa2c564fb6ed61a9bcc6a5c, type: 3}
+--- !u!1 &1030037581 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 116507075, guid: 0288acf741a254ef28dda40ffc257bae,
+    type: 3}
+  m_PrefabInstance: {fileID: 561925720}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1033971290
 GameObject:
   m_ObjectHideFlags: 0
@@ -9519,6 +9525,11 @@ PrefabInstance:
       propertyPath: GameOverTexts.Array.data[0]
       value: 
       objectReference: {fileID: 458621230}
+    - target: {fileID: 6275162205150788671, guid: 6b87dc2af1a7748abad1f00a1a7f9e71,
+        type: 3}
+      propertyPath: HealthBar
+      value: 
+      objectReference: {fileID: 1030037581}
     - target: {fileID: 6275162205464160640, guid: 6b87dc2af1a7748abad1f00a1a7f9e71,
         type: 3}
       propertyPath: m_Depth
