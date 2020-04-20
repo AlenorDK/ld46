@@ -42,10 +42,11 @@ public class ElevatorScript : InteractableObject
         targetRotation = isDown ? downPosition.rotation : upPosition.rotation;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         targetPosition = isDown ? downPosition.position : upPosition.position;
         targetRotation = isDown ? downPosition.rotation : upPosition.rotation;
+
         elevator.transform.position = Vector3.Lerp(elevator.transform.position, targetPosition, lerpingSpeed * Time.deltaTime);
         elevator.transform.rotation = Quaternion.Lerp(elevator.transform.rotation, targetRotation, lerpingSpeed * Time.deltaTime);
     }

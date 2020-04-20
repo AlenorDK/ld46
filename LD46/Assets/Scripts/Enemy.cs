@@ -146,11 +146,11 @@ public class Enemy : MonoBehaviour
     
     public void Damage(int dmg)
     {
+        blood.Play();
         health -= dmg;
         if (health > 0)
         {
             StartCoroutine(PlayHit());
-            blood.Play();
         }
 
         else if (health <= 0 && state != EnemyState.Down)
