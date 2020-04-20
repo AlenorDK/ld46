@@ -74,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
     public Image fade;
     public GameObject[] GameOverTexts;
 
+    public TextMeshProUGUI subs;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -142,6 +144,17 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         
         Debug.DrawRay(cam.transform.position, cam.transform.forward * checkingDistance, Color.red);
+
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward * 5f, out hit, maskWithoutPlayer))
+        {
+            if (hit.collider.GetComponent<Subtitles>())
+                subs.text = hit.collider.GetComponent<Subtitles>().text;
+            else
+            {
+                subs.text = "";
+            }
+        }
     }
 
     private IEnumerator JumpEvent()
