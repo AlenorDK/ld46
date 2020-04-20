@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
     {
         hands.SetActive(heldObject == null);
 
-        Debug.Log(charController.isGrounded);
+        //Debug.Log(charController.isGrounded);
         
         if (Input.GetMouseButtonDown(0) && canShoot && heldObject == null)
             needsToShoot = true;
