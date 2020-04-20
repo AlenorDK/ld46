@@ -343,6 +343,11 @@ public class PlayerMovement : MonoBehaviour
         {
             other.GetComponentInParent<PressablePlate>().isActivated = true;
         }
+
+        if (other.gameObject.tag == "MovingPlatform")
+        {
+            transform.parent = other.gameObject.transform.parent;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -350,6 +355,11 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "PlatformCollider" && other.GetComponentInParent<PressablePlate>())
         {
             other.GetComponentInParent<PressablePlate>().isActivated = false;
+        }
+        
+        if (other.gameObject.tag == "MovingPlatform")
+        {
+            transform.parent = null;
         }
     }
 }

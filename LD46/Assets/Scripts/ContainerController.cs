@@ -126,5 +126,18 @@ public class ContainerController : InteractableObject
         {
             Temperature += other.GetComponent<TemperatureZone>().TemperatureMod * Time.deltaTime;
         }
+        
+        if (other.gameObject.tag == "MovingPlatform" && !isPickedUp)
+        {
+            transform.parent = other.gameObject.transform.parent;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "MovingPlatform" && !isPickedUp)
+        {
+            transform.parent = null;
+        }
     }
 }
