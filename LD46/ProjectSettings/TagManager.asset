@@ -7,6 +7,7 @@ TagManager:
   - BoxPlacementTag
   - PlatformCollider
   - Box
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
