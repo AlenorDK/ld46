@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
                 needsToInteract = true;
         }
 
-        if (box.GetComponent<ContainerController>().Energy <= 0 && isAlive)
+        if (box != null && box.GetComponent<ContainerController>().Energy <= 0 && isAlive)
         {
             src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
             src.volume = 0.3f;
@@ -341,7 +341,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    IEnumerator Die()
+    public IEnumerator Die()
     {
         HealthBar.transform.GetChild(0).GetComponent<Image>().sprite = nullHeart;
         src.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
