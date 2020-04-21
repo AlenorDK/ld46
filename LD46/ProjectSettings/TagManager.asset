@@ -9,6 +9,7 @@ TagManager:
   - Box
   - MovingPlatform
   - FinishGame
+  - NextLevel
   layers:
   - Default
   - TransparentFX

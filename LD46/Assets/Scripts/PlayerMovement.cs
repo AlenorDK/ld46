@@ -394,6 +394,11 @@ public class PlayerMovement : MonoBehaviour
             transform.parent = other.gameObject.transform.parent;
         }
 
+        if (other.gameObject.tag == "NextLevel")
+        {
+            SceneManager.LoadScene("Level_2_Ocean");
+        }
+        
         if (other.gameObject.tag == "FinishGame")
         {
             StartCoroutine(Finish());
