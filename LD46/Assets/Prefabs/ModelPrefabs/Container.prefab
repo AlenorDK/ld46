@@ -742,7 +742,9 @@ MonoBehaviour:
   parentLoaderObject: {fileID: 0}
   lerpSpeed: 10
   isUncharging: 1
-  UnchargingSpeed: 4
+  UnchargingSpeed: 0.75
+  UnsuitableTemperatureUnchargingSpeed: 1.5
+  criticalThreshold: 25
   stealingBox1: {fileID: 6939606900708329567}
   stealingBox2: {fileID: 7895007190917510490}
   tempText: {fileID: 677535800}

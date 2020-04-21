@@ -30,7 +30,9 @@ public class ContainerController : InteractableObject
     public float lerpSpeed = 2f;
     
     public bool isUncharging = true;
-    public float UnchargingSpeed = 10f;
+    public float UnchargingSpeed = 4f;
+    public float UnsuitableTemperatureUnchargingSpeed = 6f;
+    public float criticalThreshold = 30f;
 
     public ParticleSystem stealingBox1;
     public ParticleSystem stealingBox2;
@@ -39,6 +41,8 @@ public class ContainerController : InteractableObject
 
     public AudioSource src;
     public AudioClip boxPut, alert;
+
+    private bool isPlayingAlert = false;
     
     void Start()
     {
@@ -50,7 +54,7 @@ public class ContainerController : InteractableObject
     {
         if (isUncharging)
         {
-            Energy -= UnchargingSpeed * Time.deltaTime;
+            Energy = Mathf.Abs(Temperature) > criticalThreshold ? Energy - UnsuitableTemperatureUnchargingSpeed * Time.deltaTime : Energy - UnchargingSpeed * Time.deltaTime;
             Energy = Mathf.Clamp(Energy, 0f, 100f);
         }
         
@@ -63,8 +67,9 @@ public class ContainerController : InteractableObject
         TemperatureBar.GetComponent<MeshRenderer>().material.color = TemperatureGradient.Evaluate((Temperature + 50f) / 100f);
         tempText.text = ((int) Temperature).ToString();
 
-        if (Energy > 0f && Energy < 30f)
+        if (Energy > 0f && Energy < 30f && !isPlayingAlert)
         {
+            isPlayingAlert = true;
             StartCoroutine(PlayAlert());
         }
     }
@@ -78,6 +83,8 @@ public class ContainerController : InteractableObject
             src.PlayOneShot(alert);
             yield return new WaitForSeconds(2f);
         } while (Energy > 0f && Energy < 30f);
+
+        isPlayingAlert = false;
     }
     
     public void PickUp()
