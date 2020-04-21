@@ -11209,7 +11209,6 @@ GameObject:
   - component: {fileID: 952336720}
   - component: {fileID: 952336724}
   - component: {fileID: 952336723}
-  - component: {fileID: 952336722}
   - component: {fileID: 952336721}
   m_Layer: 0
   m_Name: Door_Big_small_R_mesh
@@ -11246,27 +11245,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -528668797379121859, guid: e4b686d5369f8054eb6b8c3e61267b90, type: 3}
---- !u!114 &952336722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 952336719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2df101f1390f466783e679f2fa30a4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanBeActivated: 0
-  isOpened: 0
-  oneWay: 0
-  openedPosition: {fileID: 0}
-  closedPosition: {fileID: 0}
-  targetPosition: {x: 0, y: 0, z: 0}
-  targetRotation: {x: 0, y: 0, z: 0, w: 0}
-  door: {fileID: 952336719}
-  lerpingSpeed: 1
 --- !u!23 &952336723
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11549,6 +11527,11 @@ PrefabInstance:
       propertyPath: UnchargingSpeed
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1213802246798452673, guid: 3d56a85f66578f04bb23af8e32987240,
+        type: 3}
+      propertyPath: UnsuitableTemperatureUnchargingSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6747808785269198863, guid: 3d56a85f66578f04bb23af8e32987240,
         type: 3}
       propertyPath: m_Name
@@ -11557,7 +11540,7 @@ PrefabInstance:
     - target: {fileID: 7781746877907460636, guid: 3d56a85f66578f04bb23af8e32987240,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.86
+      value: 9.44
       objectReference: {fileID: 0}
     - target: {fileID: 7781746877907460636, guid: 3d56a85f66578f04bb23af8e32987240,
         type: 3}
@@ -11567,7 +11550,7 @@ PrefabInstance:
     - target: {fileID: 7781746877907460636, guid: 3d56a85f66578f04bb23af8e32987240,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -45.62
+      value: -42.86
       objectReference: {fileID: 0}
     - target: {fileID: 7781746877907460636, guid: 3d56a85f66578f04bb23af8e32987240,
         type: 3}
@@ -11886,7 +11869,6 @@ GameObject:
   - component: {fileID: 1007564982}
   - component: {fileID: 1007564986}
   - component: {fileID: 1007564985}
-  - component: {fileID: 1007564984}
   - component: {fileID: 1007564983}
   m_Layer: 0
   m_Name: Door_big_small_L_mesh
@@ -11923,27 +11905,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6670513025128784032, guid: e4b686d5369f8054eb6b8c3e61267b90, type: 3}
---- !u!114 &1007564984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1007564981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2df101f1390f466783e679f2fa30a4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanBeActivated: 0
-  isOpened: 0
-  oneWay: 0
-  openedPosition: {fileID: 0}
-  closedPosition: {fileID: 0}
-  targetPosition: {x: 0, y: 0, z: 0}
-  targetRotation: {x: 0, y: 0, z: 0, w: 0}
-  door: {fileID: 1007564981}
-  lerpingSpeed: 1
 --- !u!23 &1007564985
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -17404,37 +17365,37 @@ PrefabInstance:
     - target: {fileID: 6275162205150788668, guid: 6b87dc2af1a7748abad1f00a1a7f9e71,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.183093
+      value: 11.26
       objectReference: {fileID: 0}
     - target: {fileID: 6275162205150788668, guid: 6b87dc2af1a7748abad1f00a1a7f9e71,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.51
+      value: 11.76
       objectReference: {fileID: 0}
     - target: {fileID: 6275162205150788668, guid: 6b87dc2af1a7748abad1f00a1a7f9e71,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -45.96
+      value: -46.96
       objectReference: {fileID: 0}
     - target: {fileID: 6275162205150788668, guid: 6b87dc2af1a7748abad1f00a1a7f9e71,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6275162205150788668, guid: 6b87dc2af1a7748abad1f00a1a7f9e71,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6924747
+      value: 0.07262893
       objectReference: {fileID: 0}
     - target: {fileID: 6275162205150788668, guid: 6b87dc2af1a7748abad1f00a1a7f9e71,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6275162205150788668, guid: 6b87dc2af1a7748abad1f00a1a7f9e71,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7214422
+      value: 0.99735904
       objectReference: {fileID: 0}
     - target: {fileID: 6275162205150788668, guid: 6b87dc2af1a7748abad1f00a1a7f9e71,
         type: 3}
@@ -17449,7 +17410,7 @@ PrefabInstance:
     - target: {fileID: 6275162205150788668, guid: 6b87dc2af1a7748abad1f00a1a7f9e71,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -87.65301
+      value: 8.33
       objectReference: {fileID: 0}
     - target: {fileID: 6275162205150788668, guid: 6b87dc2af1a7748abad1f00a1a7f9e71,
         type: 3}
@@ -19534,6 +19495,99 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1628222609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1628222613}
+  - component: {fileID: 1628222612}
+  - component: {fileID: 1628222611}
+  - component: {fileID: 1628222610}
+  m_Layer: 0
+  m_Name: NextLevel
+  m_TagString: NextLevel
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1628222610
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628222609}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.99, y: 3.22, z: 8.7}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1628222611
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628222609}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1628222612
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628222609}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1628222613
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628222609}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 64.6, y: -29.9, z: -37.46}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 112
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1634111843
 PrefabInstance:
   m_ObjectHideFlags: 0
