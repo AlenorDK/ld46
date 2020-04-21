@@ -1,8 +1,10 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+#if UNITY_EDITOR 
 using UnityEditor;
+#endif 
 using UnityEngine;
 
 public class ContainerController : InteractableObject
