@@ -8,6 +8,7 @@ TagManager:
   - PlatformCollider
   - Box
   - MovingPlatform
+  - FinishGame
   layers:
   - Default
   - TransparentFX
