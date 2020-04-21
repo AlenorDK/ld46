@@ -393,8 +393,35 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.parent = other.gameObject.transform.parent;
         }
+
+        if (other.gameObject.tag == "FinishGame")
+        {
+            StartCoroutine(Finish());
+        }
     }
 
+    IEnumerator Finish()
+    {
+        float fadeTime = 0f;
+        TextMeshProUGUI randomText = GameOverTexts[UnityEngine.Random.Range(0, GameOverTexts.Length)].GetComponent<TextMeshProUGUI>();
+        randomText.text =
+            "When we leave to underworld,\nWhen the Sun will shine on us no more,\nWhen we will feel no wind upon our skin, \nWhen the Great Water is no more,\nWhen the Seed of Humanity will be no more\nWhen the Seed of Life will be no more, \nAnd when the Celestials arrive, \nThey will be no more";
+        while (fadeTime < 3f)
+        {
+            fadeTime += Time.deltaTime;
+            yield return null;
+            
+            randomText.color = new Color(randomText.color.r, randomText.color.g, randomText.color.b,
+                Mathf.Lerp(randomText.color.a, 1, lerpingSpeed * Time.deltaTime));
+            fade.color = new Color(fade.color.r, fade.color.g, fade.color.b,
+                Mathf.Lerp(fade.color.a, 1, lerpingSpeed * Time.deltaTime));
+        }
+
+        yield return new WaitForSeconds(10f);
+        Application.Quit();
+        Debug.Log("Game over");
+    }
+    
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "PlatformCollider" && other.GetComponentInParent<PressablePlate>())
