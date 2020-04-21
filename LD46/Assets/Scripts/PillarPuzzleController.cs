@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
-using UnityEngine.WSA;
 
 public class PillarPuzzleController : MonoBehaviour
 {
@@ -15,7 +14,6 @@ public class PillarPuzzleController : MonoBehaviour
     public float lerpingSpeed = 5f;
     
     
-    // Start is called before the first frame update
     void Start()
     {
         pillarOrigY = pillarA.transform.position.y;
