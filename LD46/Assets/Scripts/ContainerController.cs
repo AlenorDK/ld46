@@ -30,7 +30,9 @@ public class ContainerController : InteractableObject
     public float lerpSpeed = 2f;
     
     public bool isUncharging = true;
-    public float UnchargingSpeed = 10f;
+    public float UnchargingSpeed = 4f;
+    public float UnsuitableTemperatureUnchargingSpeed = 6f;
+    public float criticalThreshold = 30f;
 
     public ParticleSystem stealingBox1;
     public ParticleSystem stealingBox2;
@@ -50,7 +52,7 @@ public class ContainerController : InteractableObject
     {
         if (isUncharging)
         {
-            Energy -= UnchargingSpeed * Time.deltaTime;
+            Energy = Mathf.Abs(Temperature) > criticalThreshold ? UnsuitableTemperatureUnchargingSpeed * Time.deltaTime : UnchargingSpeed * Time.deltaTime;
             Energy = Mathf.Clamp(Energy, 0f, 100f);
         }
         
