@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+#if UNITY_EDITOR
 using UnityEditor.Experimental.GraphView;
+#endif
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -207,6 +209,7 @@ public class Enemy : MonoBehaviour
         
         if (stealingTime >= stealingBoxTime)
         {
+            playerObj.GetComponent<PlayerMovement>().Damage(100);
             Destroy(boxObj);
         }
     }
