@@ -14112,8 +14112,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.9853196, y: 4.744787, z: 0.10617147}
-  m_Center: {x: -0.028399467, y: -0.028247356, z: -0.9708621}
+  m_Size: {x: 6.9853196, y: 4.744787, z: 0.5}
+  m_Center: {x: -0.028399467, y: -0.028247356, z: -0.91}
 --- !u!4 &1198604549 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6716331852417474209, guid: 8bf6da00a99ec45afb9ee42ccb2f20bf,
@@ -16511,7 +16511,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.9853196, y: 4.744787, z: 0.10617147}
+  m_Size: {x: 6.9853196, y: 4.744787, z: 0.5}
   m_Center: {x: -0.028399467, y: -0.028247356, z: -0.9708621}
 --- !u!1001 &1429057202
 PrefabInstance:
@@ -17356,6 +17356,10 @@ PrefabInstance:
     - target: {fileID: 1255623238, guid: 6b87dc2af1a7748abad1f00a1a7f9e71, type: 3}
       propertyPath: m_ClearFlags
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1340082921, guid: 6b87dc2af1a7748abad1f00a1a7f9e71, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6275162205150788656, guid: 6b87dc2af1a7748abad1f00a1a7f9e71,
         type: 3}
